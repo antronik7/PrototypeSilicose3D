@@ -6,12 +6,14 @@ public class CubeOnMouseOver : MonoBehaviour {
     [SerializeField] Material good;
     [SerializeField] Material bad;
     [SerializeField] Material Aways;
+    [SerializeField] GameObject compteurClique;
+    CarteCliqueControlleur ctrlClique;
 
     [Tooltip("Cocher si l'objet doit etre cliquer pour gagner")][SerializeField] bool typeObjet;
 
 	// Use this for initialization
 	void Start () {
-
+        ctrlClique = compteurClique.GetComponent<CarteCliqueControlleur>();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +37,9 @@ public class CubeOnMouseOver : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (typeObjet)
+        ctrlClique.joueurACliquer(typeObjet);
+
+        if (!typeObjet)
         {
             GetComponent<Renderer>().material = good;
             GetComponent<Collider>().enabled = false;
